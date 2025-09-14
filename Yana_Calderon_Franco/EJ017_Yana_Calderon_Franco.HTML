@@ -1,0 +1,38 @@
+<html>
+    <head></head>
+    <body>
+        <form action="">
+        <table border="10" align="center">
+                <th colspan="2">Registro de Persona</th>
+            <tr>
+                <td>Nombre:</td>
+                <td><input type="text" name="nombre" placeholder="Escribe tu nombre" required></td>
+            </tr>
+            <tr>
+                <td>Apellidos:</td>
+                <td><input type="text" name="apellidos" placeholder="Escribe tus apellidos" required></td>
+            </tr>
+            <tr>
+                <td>Edad:</td>
+                <td><input type="number" name="edad" min="0" placeholder="0" required></td>
+            </tr>
+            <tr>
+                <td>Género:</td>
+                <td>
+                    <select name="genero" required>
+                        <option value="">Seleccione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Registrar Persona">
+                </td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
