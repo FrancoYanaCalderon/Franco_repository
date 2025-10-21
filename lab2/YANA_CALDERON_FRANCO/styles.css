@@ -1,0 +1,48 @@
+/* Estilos generales */
+* { box-sizing: border-box; } /* Hace que padding no aumente ancho total */
+body {
+  font-family: Arial, sans-serif; /* Fuente legible */
+  margin: 0; /* Quita margen por defecto */
+  background: #eaf6ff; /* Color de fondo claro */
+  color: #0b2235; /* Color de texto */
+  text-align: center;
+}
+
+/* BANNER */
+.banner {
+  background: #2b7cb8; /* Fondo azul */
+  color: white;
+  padding: 18px 10px; /* Espaciado arriba/abajo y lateral */
+}
+.titulo { margin: 0; font-size: 24px; }
+.banner-img {
+  width: 70%; max-width: 250px; margin-top: 10px; border-radius: 8px;
+  display: block; margin-left: auto; margin-right: auto;
+}
+
+/* MENU */
+.menu {
+  background: #1f5a7a; /* barra del menú */
+  padding: 8px 0;
+}
+.menu ul { list-style: none; margin: 0; padding: 0; }
+.menu li { display: inline-block; margin: 0 10px; }
+.menu a {
+  color: #ffffff; padding: 8px 12px; text-decoration: none; font-weight: bold;
+  border-radius: 4px;
+  display: inline-block;
+}
+.menu a:hover { background: #3aa0e6; color: #002233; }
+.menu a.active { background: #ffd54f; color: #002233; } /* estilo para el enlace activo */
+
+/* CONTENIDO */
+.contenido { padding: 20px 10px 40px 10px; }
+.seccion { display: none; /* por defecto todas ocultas */ max-width: 900px; margin: 0 auto; }
+.seccion.visible { display: block; } /* la que tenga .visible se muestra */
+.seccion h2 { color: #01314a; margin-top: 10px; }
+.seccion p { width: 85%; margin: 10px auto; font-size: 16px; line-height: 1.4; }
+.seccion img { width: 80%; max-width: 500px; border-radius: 8px; display: block; margin: 12px auto; }
+
+/* FOOTER */
+.pie { background: #0f3b53; color: white; padding: 10px; font-size: 14px; margin-top: 20px; }
+

@@ -1,0 +1,99 @@
+<!DOCTYPE html> <!-- Indico que usaré HTML5 -->
+<html lang="es"> <!-- Digo que el idioma de la página es español -->
+
+<head> <!-- Aquí va la parte interna de la página -->
+  <meta charset="UTF-8"> <!-- Permite usar acentos y eñes -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hace que se adapte a celulares -->
+  <title>Plantilla - Dinosaurios</title> <!-- Título que aparece en la pestaña -->
+  <link rel="stylesheet" href="styles.css"> <!-- Conecto con el archivo CSS que le da estilo -->
+</head>
+
+<body> <!-- Aquí empieza lo que se ve en la página -->
+
+  <header class="banner"> <!-- Encabezado de la página -->
+    <h1 class="titulo">MUNDO DE LOS DINOSAURIOS</h1> <!-- Título principal -->
+    <!-- Imagen del banner, si no se carga mostrará el texto alternativo -->
+    <img class="banner-img" src="https://img.freepik.com/vector-gratis/silueta-t-rex-dibujada-mano_23-2151300495.jpg" alt="Tyrannosaurus rex">
+  </header>
+
+  <nav class="menu"> <!-- Menú de navegación -->
+    <ul> <!-- Lista de enlaces -->
+      <li><a href="#" data-target="home" class="menu-link active">Inicio</a></li> <!-- Enlace a la sección inicio -->
+      <li><a href="#" data-target="trex" class="menu-link">T-Rex</a></li> <!-- Enlace a sección T-Rex -->
+      <li><a href="#" data-target="triceratops" class="menu-link">Triceratops</a></li> <!-- Enlace a Triceratops -->
+      <li><a href="#" data-target="velociraptor" class="menu-link">Velociraptor</a></li> <!-- Enlace a Velociraptor -->
+    </ul>
+  </nav>
+
+  <main class="contenido"> <!-- Contenedor principal de todo el contenido -->
+
+    <section id="home" class="seccion visible"> <!-- Sección inicial (visible al abrir la página) -->
+      <h2>Bienvenido</h2>
+      <p>Usa el menú para ver información e imágenes de distintos dinosaurios.</p>
+      <p>Aprendamos juntos sobre el mundo de los dinosaurios.</p>
+    </section>
+
+    <section id="trex" class="seccion"> <!-- Sección sobre el T-Rex -->
+      <h2>Tyrannosaurus Rex</h2>
+      <p>El Tyrannosaurus rex (T-Rex) fue un gran depredador del Cretácico tardío.</p>
+      <img src="tiranosaurio.jpg" alt="Tyrannosaurus rex"> <!-- Imagen local del T-Rex -->
+      <ul> <!-- Lista con datos -->
+        <li>Tamaño: hasta 12 m</li>
+        <li>Dieta: carnívoro</li>
+        <li>Periodo: Cretácico</li>
+      </ul>
+    </section>
+
+    <section id="triceratops" class="seccion"> <!-- Sección sobre Triceratops -->
+      <h2>Triceratops</h2>
+      <p>Triceratops era un herbívoro con tres cuernos y una gran placa ósea protectora.</p>
+      <img src="tricera.jpg" alt="Triceratops"> <!-- Imagen local del Triceratops -->
+      <ul>
+        <li>Tamaño: hasta 9 m</li>
+        <li>Dieta: herbívoro</li>
+        <li>Defensa: cuernos y placa</li>
+      </ul>
+    </section>
+
+    <section id="velociraptor" class="seccion"> <!-- Sección sobre Velociraptor -->
+      <h2>Velociraptor</h2>
+      <p>Velociraptor era pequeño, ágil y se cree que cazaba en grupo.</p>
+      <img src="veloci.jpg" alt="Velociraptor"> <!-- Imagen local del Velociraptor -->
+      <ul>
+        <li>Tamaño: 1.5 - 2 m</li>
+        <li>Dieta: carnívoro</li>
+        <li>Características: ágil y posiblemente con plumas</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="pie"> <!-- Pie de página -->
+    <p>TEM - Página educativa sobre dinosaurios</p>
+  </footer>
+
+  <!-- SCRIPT: Permite que el menú funcione sin recargar la página -->
+  <script>
+    const enlaces = document.querySelectorAll('.menu-link'); // Selecciona todos los enlaces del menú
+
+    function ocultarTodo() { // Función para ocultar todas las secciones
+      document.querySelectorAll('.seccion').forEach(s => s.classList.remove('visible')); // Oculta cada sección
+      enlaces.forEach(e => e.classList.remove('active')); // Quita el estilo activo del enlace
+    }
+
+    // Recorre cada enlace del menú y le agrega una acción al hacer clic
+    enlaces.forEach(enlace => {
+      enlace.addEventListener('click', function(event) {
+        event.preventDefault(); // Evita que el enlace recargue la página
+        const objetivo = this.getAttribute('data-target'); // Obtiene el ID de la sección a mostrar
+        ocultarTodo(); // Oculta las demás secciones
+        const seccion = document.getElementById(objetivo); // Busca la sección por ID
+        if (seccion) seccion.classList.add('visible'); // La muestra si existe
+        this.classList.add('active'); // Marca el enlace como activo
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplaza suavemente al inicio de la página
+      });
+    });
+  </script>
+
+</body> <!-- Termina el contenido visible -->
+</html> <!-- Termina el documento HTML -->
