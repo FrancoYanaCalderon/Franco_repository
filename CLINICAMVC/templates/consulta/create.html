@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Nueva Consulta | Clínica{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center mb-4">
+    <a href="{{ url_for('consultas.index') }}" class="btn btn-outline-secondary me-3">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+    <h3 class="fw-bold mb-0">Registrar Consulta Médica</h3>
+</div>
+
+<div class="card" style="max-width: 700px;">
+    <div class="card-body p-4">
+        <form action="{{ url_for('consultas.create') }}" method="POST">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Paciente</label>
+                    <select name="id_paciente" class="form-select" required>
+                        <option value="">Seleccione un paciente</option>
+                        {% for paciente in pacientes %}
+                        <option value="{{ paciente.id }}">{{ paciente.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Médico</label>
+                    <select name="id_medico" class="form-select" required>
+                        <option value="">Seleccione un médico</option>
+                        {% for medico in medicos %}
+                        <option value="{{ medico.id }}">{{ medico.nombre }} — {{ medico.especialidad }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Fecha</label>
+                    <input type="date" class="form-control" name="fecha" required>
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Diagnóstico</label>
+                    <textarea class="form-control" name="diagnostico" rows="3"
+                              placeholder="Describa el diagnóstico médico..." required></textarea>
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Tratamiento</label>
+                    <textarea class="form-control" name="tratamiento" rows="3"
+                              placeholder="Indique el tratamiento recomendado..." required></textarea>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-info text-white w-100 fw-semibold">
+                        <i class="bi bi-check-circle"></i> Registrar Consulta
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

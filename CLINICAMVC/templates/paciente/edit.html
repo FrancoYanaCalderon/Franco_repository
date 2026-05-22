@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Editar Paciente | Clínica{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center mb-4">
+    <a href="{{ url_for('pacientes.index') }}" class="btn btn-outline-secondary me-3">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+    <h3 class="fw-bold mb-0">Editar Paciente</h3>
+</div>
+
+<div class="card" style="max-width: 600px;">
+    <div class="card-body p-4">
+        <form action="{{ url_for('pacientes.edit', id=paciente.id) }}" method="POST">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Nombre completo</label>
+                <input type="text" class="form-control" name="nombre" value="{{ paciente.nombre }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Edad</label>
+                <input type="number" class="form-control" name="edad" value="{{ paciente.edad }}" min="0" max="120" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Dirección</label>
+                <input type="text" class="form-control" name="direccion" value="{{ paciente.direccion }}" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Teléfono</label>
+                <input type="text" class="form-control" name="telefono" value="{{ paciente.telefono }}" required>
+            </div>
+            <button type="submit" class="btn btn-warning w-100 fw-semibold">
+                <i class="bi bi-check-circle"></i> Actualizar Paciente
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

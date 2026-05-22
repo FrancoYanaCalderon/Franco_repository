@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}Panel Administrativo | Clínica{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <h3 class="fw-bold mb-1"><i class="bi bi-speedometer2 text-warning"></i> Panel Administrativo</h3>
+    <p class="text-muted">Vista general del sistema — solo accesible para administradores</p>
+</div>
+
+<!-- Tarjetas de estadisticas -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+            <div class="card-body py-4">
+                <i class="bi bi-person-badge text-primary fs-1"></i>
+                <div class="fs-2 fw-bold mt-2">{{ total_medicos }}</div>
+                <div class="text-muted">Médicos</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{{ url_for('medicos.index') }}" class="btn btn-sm btn-outline-primary w-100">Ver todos</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+            <div class="card-body py-4">
+                <i class="bi bi-people text-success fs-1"></i>
+                <div class="fs-2 fw-bold mt-2">{{ total_pacientes }}</div>
+                <div class="text-muted">Pacientes</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{{ url_for('pacientes.index') }}" class="btn btn-sm btn-outline-success w-100">Ver todos</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+            <div class="card-body py-4">
+                <i class="bi bi-clipboard2-pulse text-info fs-1"></i>
+                <div class="fs-2 fw-bold mt-2">{{ total_consultas }}</div>
+                <div class="text-muted">Consultas</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{{ url_for('consultas.index') }}" class="btn btn-sm btn-outline-info w-100">Ver todas</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+            <div class="card-body py-4">
+                <i class="bi bi-person-lock text-warning fs-1"></i>
+                <div class="fs-2 fw-bold mt-2">{{ total_usuarios }}</div>
+                <div class="text-muted">Usuarios del sistema</div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{{ url_for('admin.usuarios') }}" class="btn btn-sm btn-outline-warning w-100">Gestionar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ultimas consultas -->
+<div class="card">
+    <div class="card-header bg-white fw-semibold">
+        <i class="bi bi-clock-history text-secondary"></i> Últimas 5 consultas registradas
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Paciente</th>
+                    <th>Médico</th>
+                    <th>Diagnóstico</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in ultimas_consultas %}
+                <tr>
+                    <td>{{ c.fecha.strftime('%d/%m/%Y') }}</td>
+                    <td>{{ c.paciente.nombre }}</td>
+                    <td>{{ c.medico.nombre }}</td>
+                    <td>{{ c.diagnostico[:60] }}{% if c.diagnostico|length > 60 %}...{% endif %}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="4" class="text-center text-muted py-3">Sin consultas aún.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}Consultas | Clínica{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold mb-0"><i class="bi bi-clipboard2-pulse text-info"></i> Consultas Médicas</h3>
+    <a href="{{ url_for('consultas.create') }}" class="btn btn-info text-white">
+        <i class="bi bi-plus-circle"></i> Nueva Consulta
+    </a>
+</div>
+
+<!-- Filtro por fecha (Extra) -->
+<div class="card mb-4">
+    <div class="card-body py-3">
+        <form action="{{ url_for('consultas.index') }}" method="GET" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label fw-semibold small">Fecha inicio</label>
+                <input type="date" class="form-control" name="fecha_inicio"
+                       value="{{ fecha_inicio or '' }}">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-semibold small">Fecha fin</label>
+                <input type="date" class="form-control" name="fecha_fin"
+                       value="{{ fecha_fin or '' }}">
+            </div>
+            <div class="col-md-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary flex-grow-1">
+                    <i class="bi bi-funnel"></i> Filtrar
+                </button>
+                <a href="{{ url_for('consultas.index') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-x"></i> Limpiar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if fecha_inicio and fecha_fin %}
+<div class="alert alert-info py-2">
+    <i class="bi bi-funnel-fill"></i> Mostrando consultas del <strong>{{ fecha_inicio }}</strong>
+    al <strong>{{ fecha_fin }}</strong> — {{ consultas|length }} resultado(s)
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Paciente</th>
+                    <th>Médico</th>
+                    <th>Especialidad</th>
+                    <th>Diagnóstico</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consulta in consultas %}
+                <tr>
+                    <td>{{ consulta.id }}</td>
+                    <td>{{ consulta.fecha.strftime('%d/%m/%Y') }}</td>
+                    <td class="fw-semibold">{{ consulta.paciente.nombre }}</td>
+                    <td>{{ consulta.medico.nombre }}</td>
+                    <td><span class="badge bg-primary">{{ consulta.medico.especialidad }}</span></td>
+                    <td>{{ consulta.diagnostico[:50] }}{% if consulta.diagnostico|length > 50 %}...{% endif %}</td>
+                    <td>
+                        <a href="{{ url_for('consultas.edit', id=consulta.id) }}" class="btn btn-sm btn-warning">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a href="{{ url_for('consultas.delete', id=consulta.id) }}" class="btn btn-sm btn-danger"
+                           onclick="return confirm('¿Eliminar esta consulta?')">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="7" class="text-center text-muted py-4">No hay consultas registradas.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

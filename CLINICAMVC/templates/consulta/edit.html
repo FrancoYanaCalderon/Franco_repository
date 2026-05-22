@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Editar Consulta | Clínica{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center mb-4">
+    <a href="{{ url_for('consultas.index') }}" class="btn btn-outline-secondary me-3">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+    <h3 class="fw-bold mb-0">Editar Consulta Médica</h3>
+</div>
+
+<div class="card" style="max-width: 700px;">
+    <div class="card-body p-4">
+        <form action="{{ url_for('consultas.edit', id=consulta.id) }}" method="POST">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Paciente</label>
+                    <select name="id_paciente" class="form-select" required>
+                        <option value="">Seleccione un paciente</option>
+                        {% for paciente in pacientes %}
+                        <option value="{{ paciente.id }}"
+                            {% if paciente.id == consulta.id_paciente %}selected{% endif %}>
+                            {{ paciente.nombre }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Médico</label>
+                    <select name="id_medico" class="form-select" required>
+                        <option value="">Seleccione un médico</option>
+                        {% for medico in medicos %}
+                        <option value="{{ medico.id }}"
+                            {% if medico.id == consulta.id_medico %}selected{% endif %}>
+                            {{ medico.nombre }} — {{ medico.especialidad }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">Fecha</label>
+                    <input type="date" class="form-control" name="fecha"
+                           value="{{ consulta.fecha.strftime('%Y-%m-%d') }}" required>
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Diagnóstico</label>
+                    <textarea class="form-control" name="diagnostico" rows="3" required>{{ consulta.diagnostico }}</textarea>
+                </div>
+                <div class="col-12">
+                    <label class="form-label fw-semibold">Tratamiento</label>
+                    <textarea class="form-control" name="tratamiento" rows="3" required>{{ consulta.tratamiento }}</textarea>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-warning w-100 fw-semibold">
+                        <i class="bi bi-check-circle"></i> Actualizar Consulta
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
