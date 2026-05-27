@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center mb-4">
+    <div class="col-12 text-center">
+        <h1 class="page-title"><i class="bi bi-house-door me-2"></i>Bienvenido a TechBol</h1>
+        <p class="text-muted">Sistema de Gestion de Inventario y Ventas</p>
+    </div>
+</div>
+<div class="row g-4 justify-content-center">
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-header py-3">
+                <i class="bi bi-tags fs-2"></i>
+                <h5 class="mt-1 mb-0">Productos</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Administra el inventario de productos, precios y stock disponible.</p>
+                <a href="{{ url_for('bp_productos.index') }}" class="btn btn-primary mt-2">
+                    <i class="bi bi-arrow-right-circle me-1"></i>Ir a Productos
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-header py-3">
+                <i class="bi bi-people fs-2"></i>
+                <h5 class="mt-1 mb-0">Clientes</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Gestiona los datos de clientes registrados en el sistema.</p>
+                <a href="{{ url_for('bp_clientes.index') }}" class="btn btn-primary mt-2">
+                    <i class="bi bi-arrow-right-circle me-1"></i>Ir a Clientes
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-header py-3">
+                <i class="bi bi-cart3 fs-2"></i>
+                <h5 class="mt-1 mb-0">Pedidos</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Registra y consulta los pedidos realizados por los clientes.</p>
+                <a href="{{ url_for('bp_pedidos.index') }}" class="btn btn-primary mt-2">
+                    <i class="bi bi-arrow-right-circle me-1"></i>Ir a Pedidos
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
